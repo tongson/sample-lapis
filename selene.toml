@@ -1,0 +1,4 @@
+std = "lapis"
+
+[rules]
+global_usage = "allow"
