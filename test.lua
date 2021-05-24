@@ -7,7 +7,7 @@ local json = require("cjson")
 local g_ngx = function()
 	expect("table")(type(ngx))
 end
-local config = function()
+local cfg = function()
 	expect("xxx")(config.secret)
 	expect("test")(config.session_name)
 	expect("sha256")(config.hmac_digest)
@@ -24,7 +24,7 @@ local world = function()
 	expect(true)(b.success)
 end
 T["ngx global is a table"] = g_ngx
-T["Picking up test config"] = config
+T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
 T["/world is returning correctly"] = world
 T.summary()
