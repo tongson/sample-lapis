@@ -14,6 +14,11 @@ app:get("/layout", function(self)
 	return { render = "t_layout" }
 end)
 
+app:get("/param", function(self)
+	local v = self.params.test
+	return v
+end)
+
 app:get("/", function()
 	return "Welcome to Lapis " .. require("lapis.version")
 end)
