@@ -1,5 +1,6 @@
 local lapis = require("lapis")
 local app = lapis.Application()
+app:enable("etlua")
 local capture_errors_json = require("lapis.application").capture_errors_json
 local json_params = require("lapis.application").json_params
 
