@@ -23,8 +23,14 @@ local world = function()
 	local b = json.decode(body)
 	expect(true)(b.success)
 end
+local etlua = function()
+	local status, body = request(app, "/hello")
+	expect(200)(status)
+	T.is_not_nil(body:find("Hello"))
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
 T["/world is returning correctly"] = world
+T["etlua is rendered"] = etlua
 T.summary()
