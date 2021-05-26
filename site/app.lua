@@ -19,6 +19,11 @@ app:get("/param", function(self)
 	return v
 end)
 
+app:match("/mparam/:match", function(self)
+	local v = self.params.match
+	return v
+end)
+
 app:get("/", function()
 	return "Welcome to Lapis " .. require("lapis.version")
 end)
