@@ -40,6 +40,11 @@ local param = function()
 	expect(200)(status)
 	T.is_not_nil(body:find("yoyoyo"))
 end
+local param_match = function()
+	local status, body = request(app, "/mparam/xoxoxo")
+	expect(200)(status)
+	T.is_not_nil(body:find("xoxoxo"))
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
@@ -47,4 +52,5 @@ T["/world is returning correctly"] = world
 T["etlua is rendered"] = etlua
 T["layout is rendered"] = layout
 T["param is rendered"] = param
+T["matching param works"] = param_match
 T.summary()
