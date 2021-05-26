@@ -28,9 +28,17 @@ local etlua = function()
 	expect(200)(status)
 	T.is_not_nil(body:find("Hello"))
 end
+local layout = function()
+	local status, body = request(app, "/layout")
+	expect(200)(status)
+	T.is_not_nil(body:find("<title>Test Layout", 1, true))
+	T.is_not_nil(body:find("Greetings"))
+	T.is_not_nil(body:find("Lua"))
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
 T["/world is returning correctly"] = world
 T["etlua is rendered"] = etlua
+T["layout is rendered"] = layout
 T.summary()
