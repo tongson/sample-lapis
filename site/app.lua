@@ -2,6 +2,12 @@ local lapis = require("lapis")
 local app = lapis.Application()
 app:enable("etlua")
 app.layout = require("views.layout")
+app.handle_404 = function()
+	return {
+		status = 404,
+		"not found!",
+	}
+end
 local capture_errors_json = require("lapis.application").capture_errors_json
 local json_params = require("lapis.application").json_params
 
@@ -33,7 +39,7 @@ app:match("named_route", "/named", function(self)
 end)
 
 app:match("named_route2", "/user/:name", function(self)
-  return "Hello " .. self.params.name .. ", go home: " .. self:url_for("named_route")
+	return "Hello " .. self.params.name .. ", go home: " .. self:url_for("named_route")
 end)
 
 app:get("/", function()
