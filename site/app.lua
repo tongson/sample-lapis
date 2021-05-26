@@ -1,11 +1,17 @@
 local lapis = require("lapis")
 local app = lapis.Application()
 app:enable("etlua")
+app.layout = require("views.layout")
 local capture_errors_json = require("lapis.application").capture_errors_json
 local json_params = require("lapis.application").json_params
 
 app:get("/hello", function()
 	return { render = "hello" }
+end)
+
+app:get("/layout", function(self)
+	self.page_title = "Test Layout"
+	return { render = "t_layout" }
 end)
 
 app:get("/", function()
