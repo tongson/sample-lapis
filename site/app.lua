@@ -5,7 +5,7 @@ local capture_errors_json = require("lapis.application").capture_errors_json
 local json_params = require("lapis.application").json_params
 
 app:get("/hello", function()
-	return { render = "index" }
+	return { render = "hello" }
 end)
 
 app:get("/", function()
