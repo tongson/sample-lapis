@@ -46,6 +46,11 @@ local param_match = function()
 	expect(200)(status)
 	trve(body:find("xoxoxo"))
 end
+local param_precedence = function()
+	local status, body = request(app, "/pparam/ccc?this=aaa")
+	expect(200)(status)
+	trve(body:find("ccc"))
+end
 local named_route = function()
 	local status, body = request(app, "/named")
 	expect(200)(status)
@@ -63,5 +68,6 @@ T["etlua is rendered"] = etlua
 T["layout is rendered"] = layout
 T["param is rendered"] = param
 T["matching param works"] = param_match
+T["route match has precedence"] = param_precedence
 T["named route works"] = named_route
 T.summary()
