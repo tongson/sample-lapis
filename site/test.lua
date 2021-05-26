@@ -35,10 +35,16 @@ local layout = function()
 	T.is_not_nil(body:find("Greetings"))
 	T.is_not_nil(body:find("Lua"))
 end
+local param = function()
+	local status, body = request(app, "/param?test=yoyoyo")
+	expect(200)(status)
+	T.is_not_nil(body:find("yoyoyo"))
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
 T["/world is returning correctly"] = world
 T["etlua is rendered"] = etlua
 T["layout is rendered"] = layout
+T["param is rendered"] = param
 T.summary()
