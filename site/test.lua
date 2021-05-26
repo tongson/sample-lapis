@@ -60,6 +60,11 @@ local named_route = function()
 	trve(body:find("Hello xxx"))
 	trve(body:find("go home: /named", 1, true))
 end
+local handle_404 = function()
+	local status, body = request(app, "/lolxror")
+	expect(404)(status)
+	trve(body:find("not found!", 1, true))
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
@@ -70,4 +75,5 @@ T["param is rendered"] = param
 T["matching param works"] = param_match
 T["route match has precedence"] = param_precedence
 T["named route works"] = named_route
+T["able to handle 404s"] = handle_404
 T.summary()
