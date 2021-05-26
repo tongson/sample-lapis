@@ -24,6 +24,10 @@ app:match("/mparam/:match", function(self)
 	return v
 end)
 
+app:match("/pparam/:this", function(self)
+	return self.params.this
+end)
+
 app:match("named_route", "/named", function(self)
 	return self:url_for("named_route2", { name = "Lua" })
 end)
