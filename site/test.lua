@@ -45,6 +45,15 @@ local param_match = function()
 	expect(200)(status)
 	T.is_not_nil(body:find("xoxoxo"))
 end
+local named_route = function()
+	local status, body = request(app, "/named")
+	expect(200)(status)
+	T.is_not_nil(body:find("/user/Lua", 1, true))
+	status, body = request(app, "/user/xxx")
+	expect(200)(status)
+	T.is_not_nil(body:find("Hello xxx"))
+	T.is_not_nil(body:find("go home: /named", 1, true))
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
@@ -53,4 +62,5 @@ T["etlua is rendered"] = etlua
 T["layout is rendered"] = layout
 T["param is rendered"] = param
 T["matching param works"] = param_match
+T["named route works"] = named_route
 T.summary()
