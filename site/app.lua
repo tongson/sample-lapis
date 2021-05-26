@@ -24,6 +24,14 @@ app:match("/mparam/:match", function(self)
 	return v
 end)
 
+app:match("named_route", "/named", function(self)
+	return self:url_for("named_route2", { name = "Lua" })
+end)
+
+app:match("named_route2", "/user/:name", function(self)
+  return "Hello " .. self.params.name .. ", go home: " .. self:url_for("named_route")
+end)
+
 app:get("/", function()
 	return "Welcome to Lapis " .. require("lapis.version")
 end)
