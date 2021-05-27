@@ -65,6 +65,19 @@ local handle_404 = function()
 	expect(404)(status)
 	trve(body:find("not found!", 1, true))
 end
+local json = function()
+	local b = {
+		id = 1,
+		title = "test 1",
+		description = "this is the first test",
+	}
+	local status, body = request(app, "/create", { post = { item = json.encode(b) } })
+	expect(200)(status)
+	local j = json.decode(body)
+	expect(1)(j.id)
+	expect("test 1")(j.title)
+	expect("this is the first test")(j.description)
+end
 T["ngx global is a table"] = g_ngx
 T["Picking up test config"] = cfg
 T["root is returning correctly"] = root
@@ -76,4 +89,5 @@ T["matching param works"] = param_match
 T["route match has precedence"] = param_precedence
 T["named route works"] = named_route
 T["able to handle 404s"] = handle_404
+T["post to json works"] = json
 T.summary()
