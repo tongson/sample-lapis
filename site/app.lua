@@ -1,5 +1,6 @@
 local lapis = require("lapis")
 local app = lapis.Application()
+local from_json = require("lapis.util").from_json
 app:enable("etlua")
 app.layout = require("views.layout")
 app.handle_404 = function()
@@ -40,6 +41,13 @@ end)
 
 app:match("named_route2", "/user/:name", function(self)
 	return "Hello " .. self.params.name .. ", go home: " .. self:url_for("named_route")
+end)
+
+app:post("/create", function(self)
+        local t = from_json(self.params.item)
+        return {
+                json = t
+        }
 end)
 
 app:get("/", function()
